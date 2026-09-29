@@ -1,0 +1,15 @@
+{
+  // Side 1 of 2: the JavaScript. tsc is a pure type-checker here — it never
+  // emits anything, the existing build (or none, in this PoC) owns the output.
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,          // every .js file is checked; opt out with // @ts-nocheck
+    "target": "es5",
+    "lib": ["dom", "es2017"],
+    "strict": false,          // start loose on legacy code, tighten later
+    "skipLibCheck": true,
+    "types": ["angular"]
+  },
+  "include": ["src/**/*.js", "src/**/*.d.ts"]
+}

@@ -1,0 +1,10 @@
+<!-- Directive template: the checker finds its scope through the directive's templateUrl. -->
+<article class="card">
+    <h2>{{ title || (student | fullName) }}</h2>
+    <p>Age: {{ age() }}</p>
+    <!-- BUG: `email` is `string | null`, it has no `.adress` -->
+    <p ng-if="student.email">E-mail: {{ student.email.adress }}</p>
+    <!-- BUG: copy-pasted from the page template; `select` does not exist on the isolate scope -->
+    <button ng-click="select(student)">Select</button>
+    <button ng-click="onEdit()">Edit</button>
+</article>

@@ -1,0 +1,32 @@
+# Both checks as blocking CI jobs. With the planted bugs in src/ both jobs
+# fail on purpose; fix the seven BUG lines and they go green.
+#
+# Two jobs rather than one so a failure says immediately which half broke.
+name: type-check
+
+on: [push, pull_request]
+
+jobs:
+  js:
+    name: JavaScript (tsc --checkJs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run type-check
+
+  templates:
+    name: Templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run type-check:templates

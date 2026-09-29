@@ -1,0 +1,30 @@
+<!-- Page template: its scope comes from ng-controller="Students" below. -->
+<section ng-controller="Students">
+    <h1>Students ({{ students.length }})</h1>
+
+    <input type="search" ng-model="search" placeholder="Filter…">
+
+    <ul>
+        <li ng-repeat="student in students | filter:search track by student.id">
+            <!-- BUG: `frist_name` is not a Student property -->
+            {{ $index + 1 }}. {{ student.frist_name }} {{ student.last_name }}
+            <!-- BUG: filter name typo, `numbr` instead of `number` -->
+            ({{ student.lessons_taken | numbr }} lessons)
+            <button ng-click="select(student)">Show</button>
+            <!-- BUG: remove() takes one argument, the extra one is silently dropped at runtime -->
+            <button ng-click="remove(student, $index)">Remove</button>
+        </li>
+    </ul>
+
+    <!-- BUG: the member is called `editing`; `isEditing` is always undefined, so this is always shown -->
+    <div ng-if="selected && !isEditing">
+        <student-card student="selected" on-edit="startEditing()"></student-card>
+    </div>
+
+    <form name="editForm" ng-if="editing">
+        <input name="email" type="email" ng-model="selected.email">
+        <!-- NOT caught: ng.IFormController has a string index signature, so a typo
+             like `editForm.email.$invald` is `any` and passes. See README. -->
+        <p ng-show="editForm.email.$invalid">Please enter a valid e-mail address.</p>
+    </form>
+</section>
