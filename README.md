@@ -199,3 +199,7 @@ Not handled, to add for your app when needed:
 - **Types can lie.** A contract is only as good as its author. If `Student`
   is modelled on the server's entity class and not on what the API really
   serializes, the checker will confidently "fix" your template the wrong way.
+
+## License
+
+[MIT](LICENSE). Provided as is, without warranty; see the disclaimer at the top.

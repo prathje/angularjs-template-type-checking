@@ -1,6 +1,7 @@
 {
   "name": "angularjs-template-type-checking",
   "private": true,
+  "license": "MIT",
   "description": "Type-check a legacy AngularJS app (JS + HTML templates) with tsc, without changing a line of runtime code.",
   "scripts": {
     "type-check": "tsc --noEmit -p tsconfig.json",
